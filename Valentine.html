@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Babymon to Babymol</title>
+    <style>
+        body {
+            height: 100vh;
+            background: pink;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+            font-size: 24px;
+        }
+        button {
+            padding: 20px 40px;
+            margin: 10px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .yes { background: red; color: white; }
+        .no { background: blue; color: white; position: absolute; }
+        .hide { display: none; }
+    </style>
+</head>
+<body>
+    <div>Babymon ❤️ Babymol</div>
+    <div style="font-size: 30px; margin: 20px;">Will you be my Valentine?</div>
+    <div>
+        <button class="yes" onclick="yes()">Yes 💖</button>
+        <button class="no" id="noBtn" onclick="noClick()">No</button>
+    </div>
+
+    <div id="win" class="hide" style="font-size: 40px; color: red;">
+        Yay! 💕💕💕
+    </div>
+
+    <script>
+        let tries = 0;
+        const noBtn = document.getElementById('noBtn');
+        
+        document.addEventListener('mousemove', function(e) {
+            const rect = noBtn.getBoundingClientRect();
+            const dx = e.clientX - (rect.left + rect.width/2);
+            const dy = e.clientY - (rect.top + rect.height/2);
+            
+            if (Math.sqrt(dx*dx + dy*dy) < 80) {
+                noBtn.style.left = (Math.random() * 70 + 10) + 'vw';
+                noBtn.style.top = (Math.random() * 70 + 10) + 'vh';
+                tries++;
+                if (tries == 1) noBtn.innerHTML = 'Maybe?';
+                if (tries == 2) noBtn.innerHTML = 'Click Yes!';
+            }
+        });
+        
+        function noClick() {
+            noBtn.style.left = (Math.random() * 70 + 10) + 'vw';
+            noBtn.style.top = (Math.random() * 70 + 10) + 'vh';
+        }
+        
+        function yes() {
+            document.querySelector('.yes').classList.add('hide');
+            noBtn.classList.add('hide');
+            document.getElementById('win').classList.remove('hide');
+        }
+    </script>
+</body>
+</html>
